@@ -4,10 +4,6 @@ import CTA from "@/shared/components/CTA";
 import { loadCart, saveCart } from "@/shared/lib/cart";
 import type { CartItem } from "@/shared/lib/cart";
 
-function clamp(n: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, n));
-}
-
 function formatBRLFromCents(valueInCents: number) {
   return (valueInCents / 100).toLocaleString("pt-BR", {
     style: "currency",
@@ -23,19 +19,9 @@ export default function CartPage() {
   }, [items]);
 
   const subtotal = useMemo(
-    () => items.reduce((acc, it) => acc + it.price * it.quantity, 0),
+    () => items.reduce((acc, it) => acc + it.price, 0),
     [items]
   );
-
-  function updateQuantity(id: string, type: CartItem["type"], nextQty: number) {
-    setItems((prev) =>
-      prev.map((it) =>
-        it.id === id && it.type === type
-          ? { ...it, quantity: clamp(nextQty, 1, 99) }
-          : it
-      )
-    );
-  }
 
   function removeItem(id: string, type: CartItem["type"]) {
     setItems((prev) => prev.filter((it) => !(it.id === id && it.type === type)));
@@ -102,8 +88,6 @@ export default function CartPage() {
 
               <div className="mt-6 divide-y divide-white/10">
                 {items.map((it) => {
-                  const lineTotal = it.price * it.quantity;
-
                   return (
                     <div key={it.id} className="py-6">
                       <div className="flex gap-4">

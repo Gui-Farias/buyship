@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "@/shared/components/header";
 import AuthModal from "@/shared/features/auth/components/auth-modal";
-import Footer from "./shared/components/footer";
-import ScrollTop from "@/shared/components/ScrollTop";
+import Footer from "@/shared/components/footer";
+import ScrollTop from "@/shared/components/scrollTop";
 
 export default function AppShell() {
   const [authOpen, setAuthOpen] = useState(false);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Logo from "@/assets/logo.svg?react";
+import Logo from "@/assets/BuyShipLogo.png";
 import LoginOut from "@/shared/features/auth/components/login-out";
 
 type HeaderProps = {
@@ -27,7 +27,7 @@ export default function Header({ onOpenLogin }: HeaderProps) {
     <header className="sticky top-0 z-40 w-full bg-transparent backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link to="/" className="flex items-center gap-2 font-bold" onClick={() => setMobileOpen(false)}>
-          <Logo />
+          <img src={Logo} alt="BuyShip Logo" className="h-auto w-40 object-contain" />
         </Link>
 
         {/* NAV desktop */}

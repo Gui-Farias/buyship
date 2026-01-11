@@ -1,4 +1,3 @@
-// src/shared/components/CTA/index.tsx
 import { Link } from "react-router-dom";
 
 type CTAVariant = "primary" | "outline";

@@ -18,7 +18,6 @@ export default async function handler(req: any, res: any) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
   try {
-    // Vercel pode entregar body como string em alguns cenários
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
     const items = body?.items as Item[];
 
@@ -30,13 +29,13 @@ export default async function handler(req: any, res: any) {
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      success_url: `${appUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${appUrl}/checkoutSuccess`,
       cancel_url: `${appUrl}/cart`,
       line_items: items.map((it) => ({
         price_data: {
           currency: "brl",
           product_data: { name: String(it.name ?? "Item") },
-          unit_amount: Number(it.unit_amount), // centavos
+          unit_amount: Number(it.unit_amount), 
         },
         quantity: Number(it.quantity) || 1,
       })),
@@ -44,7 +43,6 @@ export default async function handler(req: any, res: any) {
 
     return res.status(200).json({ url: session.url });
   } catch (e: any) {
-    // expõe a mensagem real do Stripe (quando existir)
     const stripeMsg = e?.raw?.message || e?.message || "Server error";
     return res.status(500).json({ error: stripeMsg });
   }

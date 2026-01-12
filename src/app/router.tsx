@@ -7,6 +7,7 @@ import Experiences from "@/pages/experiences";
 import ExperiencesDetailsPage from "@/pages/experiencesDetailsPage";
 import Contact from "@/pages/contact";
 import Cart from "@/pages/cart";
+import CheckoutSuccessPage from "@/pages/checkout";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,8 @@ export const router = createBrowserRouter([
       { path: "experiences", element: <Experiences /> },
       { path: "experiences/:slug", element: <ExperiencesDetailsPage /> },
       { path: "contact", element: <Contact /> },
-      { path: "cart", element: <Cart /> }
+      { path: "cart", element: <Cart /> },
+      { path: "checkoutSuccess", element: <CheckoutSuccessPage /> }
     ]
   }
 ]);

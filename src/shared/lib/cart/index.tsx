@@ -1,8 +1,6 @@
-export type CartItemType = "ship" | "experience";
-
 export type CartItem = {
   id: string;
-  type: CartItemType;
+  type: "ship" | "experience";
   slug: string;
   title: string;
   price: number;
@@ -64,15 +62,7 @@ export function addToCart(next: Omit<CartItem, "quantity">, qty = 1) {
   saveCart(items);
 }
 
-export function updateCartQuantity(id: string, type: CartItemType, qty: number) {
-  const items = loadCart().map((it) =>
-    it.id === id && it.type === type ? { ...it, quantity: clamp(qty, 1, 99) } : it
-  );
-  saveCart(items);
-  return items;
-}
-
-export function removeFromCart(id: string, type: CartItemType) {
+export function removeFromCart(id: string, type: CartItem["type"]) {
   const items = loadCart().filter((it) => !(it.id === id && it.type === type));
   saveCart(items);
   return items;

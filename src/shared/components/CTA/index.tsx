@@ -5,6 +5,7 @@ type CTAVariant = "primary" | "outline";
 type CTAProps = {
   to: string;
   variant?: CTAVariant;
+  classes?: string;
   label: string;
 };
 
@@ -20,8 +21,10 @@ export default function CTA({
     outline: "border border-(--primary-active) text-(--primary-active) hover:bg-(--primary-active)/10",
   };
 
+  let classes = "";
+
   return (
-    <Link to={to} className={`${baseClasses} ${variants[variant]}`}>
+    <Link to={to} className={`${baseClasses} ${variants[variant]} ${classes}`}>
       {label}
     </Link>
   );

@@ -2,6 +2,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Breadcrumb from "@/shared/components/Breadcrumb";
 import CTA from "@/shared/components/CTA";
 import { addToCart } from "@/shared/lib/cart";
+import { formatBRLFromCents } from "@/shared/lib/format-currency";
+
 
 type Experience = {
   id: string;
@@ -123,10 +125,6 @@ const experiencesCatalog: Experience[] = [
   },
 ];
 
-function formatBRL(value: number) {
-  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
-
 function SectionTitle({ children }: { children: string }) {
   return <h2 className="text-lg font-semibold text-white">{children}</h2>;
 }
@@ -215,7 +213,7 @@ export default function ExperiencesDetailsPage() {
               <div>
                 <p className="text-xs text-white/60">A partir de</p>
                 <p className="text-3xl font-bold text-white">
-                  {formatBRL(experience.price)}
+                  {formatBRLFromCents(experience.price)}
                 </p>
                 <p className="mt-1 text-xs text-white/50">valor único</p>
               </div>
@@ -248,7 +246,6 @@ export default function ExperiencesDetailsPage() {
         </div>
       </header>
 
-      {/* Content */}
       <div className="mt-10 grid gap-6 lg:grid-cols-3">
         <section className="lg:col-span-2 space-y-6">
           <div className=" border border-white/10 bg-black/50 p-8">

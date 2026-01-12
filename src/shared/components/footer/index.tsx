@@ -18,22 +18,20 @@ export default function Footer({
   addressLine1 = "Av. Orbital, 9070 - Centro",
   addressLine2 = "São Paulo - SP",
   links = [
-    { label: "Ships", to: "/ships" },
-    { label: "Experiences", to: "/experiences" },
-    { label: "Contact", to: "/contact" },
-    { label: "Terms & Conditions", to: "/terms" },
+    { label: "Naves", to: "/ships" },
+    { label: "Experiencias", to: "/experiences" },
+    { label: "Contato", to: "/contact" },
+    { label: "Carrinho", to: "/cart" },
   ],
 }: FooterProps) {
   return (
     <footer className="bg-black text-white">
       <div className="mx-auto max-w-6xl px-4 py-14">
         <div className="grid gap-10 md:grid-cols-3">
-          {/* Brand */}
           <div>
             <div className="text-2xl font-bold tracking-tight">{brand}</div>
           </div>
 
-          {/* Contact */}
           <div>
             <h3 className="text-sm font-semibold tracking-wide text-white/80">
               CONTATO
@@ -82,7 +80,6 @@ export default function Footer({
             </div>
           </div>
 
-          {/* Info links */}
           <div>
             <h3 className="text-sm font-semibold tracking-wide text-white/80">
               INFORMAÇÕES

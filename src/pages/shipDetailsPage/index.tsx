@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import BreadcrumbFromUrl from "@/shared/components/Breadcrumb";
 import CTA from "@/shared/components/CTA";
 import { addToCart } from "@/shared/lib/cart";
+import { formatBRLFromCents } from "@/shared/lib/format-currency";
 
 type Ship = {
   id: string;
@@ -130,10 +131,6 @@ const ships: Ship[] = [
 ];
 
 
-function formatBRL(value: number) {
-  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
-
 function tierLabel(tier: Ship["tier"]) {
   if (tier === "entry") return "Entry";
   if (tier === "premium") return "Premium";
@@ -223,7 +220,7 @@ export default function ShipDetailsPage() {
 
             <div className="shrink-0 text-right">
               <p className="text-xs text-muted-foreground">A partir de</p>
-              <p className="text-2xl font-bold text-(--accent)">{formatBRL(ship.priceFrom)}</p>
+              <p className="text-2xl font-bold text-(--accent)">{formatBRLFromCents(ship.priceFrom)}</p>
               <p className="text-xs text-muted-foreground">estimativa</p>
             </div>
           </div>
@@ -247,7 +244,6 @@ export default function ShipDetailsPage() {
             </div>
           </div>
 
-          {/* Features */}
           <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
             {ship.features.map((f) => (
               <li key={f} className="flex gap-3">
@@ -260,7 +256,6 @@ export default function ShipDetailsPage() {
             ))}
           </ul>
 
-          {/* Specs */}
           <div className="mt-8  border border-black/10 p-6">
             <h2 className="text-lg font-semibold text-(--accent)">Especificações</h2>
 

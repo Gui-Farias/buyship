@@ -1,18 +1,38 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import CTA from "@/shared/components/CTA";
+import { useSession } from "@/shared/hooks/useSession";
+import { useAuthModal } from "@/shared/features/auth/auth-modal-context";
 import { loadCart, saveCart } from "@/shared/lib/cart";
+import { formatBRLFromCents } from "@/shared/lib/format-currency";
 import type { CartItem } from "@/shared/lib/cart";
-
-function formatBRLFromCents(valueInCents: number) {
-  return (valueInCents / 100).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  });
-}
+import CTA from "@/shared/components/CTA";
+import { startStripeCheckout } from "@/shared/lib/stripe";
 
 export default function CartPage() {
+  const session = useSession();
+  const { openLogin } = useAuthModal();
+  const isLogged = !!session;
   const [items, setItems] = useState<CartItem[]>(() => loadCart());
+
+  const [payLoading, setPayLoading] = useState(false);
+  const [payError, setPayError] = useState<string | null>(null);
+
+  async function handleCheckout() {
+    if (!isLogged) {
+      openLogin();
+      return;
+    }
+
+    setPayError(null);
+    setPayLoading(true);
+
+    try {
+      await startStripeCheckout(items);
+    } catch (e: any) {
+      setPayError(e?.message ?? "Não foi possível iniciar o pagamento");
+      setPayLoading(false);
+    }
+  }
 
   useEffect(() => {
     saveCart(items);
@@ -162,17 +182,19 @@ export default function CartPage() {
                 </div>
               </div>
 
-              <div className="mt-6 grid gap-3">
-                <CTA
-                  to="/checkout"
-                  variant="primary"
-                  label="Finalizar compra"
-                />
-                <CTA
-                  to="/contact"
-                  variant="outline"
-                  label="Finalizar pelo WhatsApp"
-                />
+             <div className="mt-6 grid gap-3">
+                <button
+                  type="button"
+                  onClick={handleCheckout}
+                  disabled={payLoading}
+                  className="inline-flex h-11 cursor-pointer items-center justify-center bg-black px-5 text-sm font-semibold text-white disabled:opacity-60"
+                >
+                  {isLogged ? (payLoading ? "Redirecionando..." : "Finalizar compra") : "Entrar na conta"}
+                </button>
+
+                {payError ? <p className="text-sm text-red-500">{payError}</p> : null}
+
+                <CTA to="/contact" variant="outline" label="Finalizar pelo WhatsApp" />
               </div>
             </div>
           </aside>

@@ -17,7 +17,7 @@ export default function Header({ onOpenLogin }: HeaderProps) {
 
   useEffect(() => {
     function onResize() {
-      if (window.innerWidth >= 768) setMobileOpen(false); // md
+      if (window.innerWidth >= 768) setMobileOpen(false);
     }
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -30,7 +30,6 @@ export default function Header({ onOpenLogin }: HeaderProps) {
           <img src={Logo} alt="BuyShip Logo" className="h-auto w-40 object-contain" />
         </Link>
 
-        {/* NAV desktop */}
         <nav className="hidden flex-1 items-center justify-center gap-6 md:flex">
           <NavLink to="/" className={navClass} end>
             Inicio
@@ -89,7 +88,6 @@ export default function Header({ onOpenLogin }: HeaderProps) {
           <LoginOut onOpenLogin={onOpenLogin} />
         </div>
 
-        {/* Botão hambúrguer (mobile) */}
         <button
           type="button"
           className="inline-flex items-center justify-center rounded-lg border border-white/10 bg-black/30 p-2 text-white md:hidden"

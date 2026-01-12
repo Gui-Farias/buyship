@@ -1,8 +1,8 @@
-// src/pages/experiences/index.tsx
 import { useMemo, useState } from "react";
 import CTA from "@/shared/components/CTA";
 import Highlight from "../home/components/highlight";
 import { useNavigate } from "react-router-dom";
+import { formatBRLFromCents } from "@/shared/lib/format-currency";
 
 type Experience = {
   id: string;
@@ -51,9 +51,6 @@ const experiences: Experience[] = [
 
 type FilterValue = "all" | Experience["category"];
 
-function formatBRL(value: number) {
-  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
 
 function FilterPills({ value, onChange }: {
   value: FilterValue;
@@ -154,7 +151,7 @@ export default function ExperiencesPage() {
                 <div className="shrink-0 text-right">
                   <p className="text-xs text-white/60">A partir de</p>
                   <p className="text-2xl font-bold text-white">
-                    {formatBRL(xp.price)}
+                    {formatBRLFromCents(xp.price)}
                   </p>
                   <p className="text-xs text-white/50">valor único</p>
                 </div>

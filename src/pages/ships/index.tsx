@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CTA from "@/shared/components/CTA";
+import { formatBRLFromCents } from "@/shared/lib/format-currency";
 
 type Ship = {
   id: string;
@@ -129,10 +130,6 @@ const ships: Ship[] = [
 
 type FilterValue = "all" | Ship["tier"];
 
-function formatBRL(value: number) {
-  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
-
 function FilterPills({
   value,
   onChange,
@@ -253,7 +250,7 @@ export default function ShipsPage() {
                     <div className="shrink-0 text-right">
                       <p className="text-xs text-white/60">A partir de</p>
                       <p className="text-2xl font-bold text-white">
-                        {formatBRL(ship.priceFrom)}
+                        {formatBRLFromCents(ship.priceFrom)}
                       </p>
                       <p className="text-xs text-white/50">estimativa</p>
                     </div>

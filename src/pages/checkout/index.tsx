@@ -29,13 +29,7 @@ export default function CheckoutSuccessPage() {
         <div className="mt-8 flex flex-wrap gap-3">
           <CTA to="/ships" variant="primary" label="Ver mais naves" />
           <CTA to="/experiences" variant="outline" label="Ver experiências" />
-
-          <Link
-            to="/"
-            className="inline-flex h-11 items-center justify-center border border-white/15 px-5 text-sm font-semibold text-white/80 hover:bg-white/5"
-          >
-            Voltar para Home
-          </Link>
+          <CTA to="/" variant="outline" label="Voltar para Home" />
         </div>
 
         <div className="mt-10 border-t border-white/10 pt-6">

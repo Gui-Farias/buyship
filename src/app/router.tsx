@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import AppShell from "@/App";
 import Home from "@/pages/home";
 import Ships from "@/pages/ships";
@@ -9,7 +9,7 @@ import Contact from "@/pages/contact";
 import Cart from "@/pages/cart";
 import CheckoutSuccessPage from "@/pages/checkout";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: "/",
     element: <AppShell />,

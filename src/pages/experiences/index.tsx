@@ -6,6 +6,7 @@ import { formatBRLFromCents } from "@/shared/lib/format-currency";
 
 type Experience = {
   id: string;
+  dataTestid?: string;
   slug: string;
   title: string;
   price: number;
@@ -18,9 +19,10 @@ type Experience = {
 const experiences: Experience[] = [
   {
     id: "1",
+    dataTestid: "experience-orbital-premium",
     slug: "orbital-premium",
     title: "Experiência Orbital Premium",
-    price: 29900,
+    price: 2990000,
     description: "Um pacote completo para viver o espaço com conforto e segurança. Inclui treinamento com instrutores, protocolos de missão e uma janela panorâmica para observação da Terra. Ideal para quem quer a experiência mais exclusiva, com suporte dedicado e detalhes premium do início ao fim.",
     highlight: true,
     category: "orbital",
@@ -34,9 +36,10 @@ const experiences: Experience[] = [
   },
   {
     id: "2",
+    dataTestid: "experience-suborbital",
     slug: "suborbital-adventure",
     title: "Aventura Suborbital",
-    price: 19900,
+    price: 1990000,
     description: "Perfeita para a primeira vez. Um voo suborbital de alta performance com sessão de microgravidade, briefing completo e preparação no mesmo dia. Uma experiência intensa, com foco em sensação de voo e gravidade zero — sem perder o conforto e o acompanhamento da equipe.",
     category: "suborbital",
     bullets: [
@@ -128,7 +131,8 @@ export default function ExperiencesPage() {
                   if (e.key === "Enter" || e.key === " ") {
                     navigate(`/experiences/${xp.slug}`);
                   }
-                }}>
+                }}
+                data-testid={xp.dataTestid}>
               <div className="flex flex-col justify-between">
               <div className="flex items-start justify-between gap-6">
                 <div>

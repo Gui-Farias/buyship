@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Logo from "@/assets/BuyShipLogo.png";
+import Logo from "@/BuyShipLogo.png";
 import LoginOut from "@/shared/features/auth/components/login-out";
 
 type HeaderProps = {
@@ -37,7 +37,7 @@ export default function Header({ onOpenLogin }: HeaderProps) {
           <NavLink to="/ships" className={navClass}>
             Naves
           </NavLink>
-          <NavLink to="/experiences" className={navClass}>
+          <NavLink to="/experiences" className={navClass} data-testid="nav-experiences">
             Experiencias
           </NavLink>
           <NavLink to="/contact" className={navClass}>
@@ -128,7 +128,7 @@ export default function Header({ onOpenLogin }: HeaderProps) {
                 <NavLink to="/ships" className={navClass} onClick={() => setMobileOpen(false)}>
                   Naves
                 </NavLink>
-                <NavLink to="/experiences" className={navClass} onClick={() => setMobileOpen(false)}>
+                <NavLink to="/experiences" data-testid="nav-experiences" className={navClass} onClick={() => setMobileOpen(false)}>
                   Experiencias
                 </NavLink>
                 <NavLink to="/contact" className={navClass} onClick={() => setMobileOpen(false)}>

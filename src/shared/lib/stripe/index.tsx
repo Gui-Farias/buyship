@@ -1,8 +1,17 @@
+import { supabase } from "@/lib/supabase";
 import type { CartItem } from "@/shared/lib/cart";
 
 type StripeCheckoutItem = { name: string; unit_amount: number; quantity: number };
 
 export async function startStripeCheckout(cartItems: CartItem[]) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user?.email) {
+      throw new Error("Usuário sem email");
+    }
+    
   const items: StripeCheckoutItem[] = cartItems.map((it) => ({
     name: it.title,
     unit_amount: it.price,
@@ -12,7 +21,7 @@ export async function startStripeCheckout(cartItems: CartItem[]) {
   const res = await fetch("/api/create-checkout-session", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ items }),
+    body: JSON.stringify({ email: user.email, items }),
   });
 
    const data = await res.json();

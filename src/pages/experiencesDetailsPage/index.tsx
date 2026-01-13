@@ -3,7 +3,8 @@ import Breadcrumb from "@/shared/components/Breadcrumb";
 import CTA from "@/shared/components/CTA";
 import { addToCart } from "@/shared/lib/cart";
 import { formatBRLFromCents } from "@/shared/lib/format-currency";
-
+import OrbitalPremium from '/orbitalPremium.webp';
+import aventuraSuborbital from '/aventuraSuborbital.webp';
 
 type Experience = {
   id: string;
@@ -26,11 +27,11 @@ const experiencesCatalog: Experience[] = [
     id: "1",
     slug: "orbital-premium",
     title: "Experiência Orbital Premium",
-    price: 29900,
+    price: 2990000,
     description:
       "Voo orbital exclusivo com vistas panorâmicas da Terra, cabine de luxo, equipe dedicada e treinamento pré-voo completo.",
     highlight: true,
-    heroImageSrc: "/images/experiences/orbital-premium.webp",
+    heroImageSrc: OrbitalPremium,
     durationLabel: "Duração total: 3 dias (inclui treinamento)",
     altitudeLabel: "Perfil: Órbita baixa (LEO)",
     included: [
@@ -82,10 +83,10 @@ const experiencesCatalog: Experience[] = [
     id: "2",
     slug: "suborbital-adventure",
     title: "Aventura Suborbital",
-    price: 19900,
+    price: 1990000,
     description:
       "Experiência suborbital de alta performance com gravidade zero, ideal para quem deseja sentir o espaço pela primeira vez.",
-    heroImageSrc: "/images/experiences/suborbital-adventure.webp",
+    heroImageSrc: aventuraSuborbital,
     durationLabel: "Duração total: 1 dia",
     altitudeLabel: "Perfil: Suborbital (microgravidade)",
     included: [
@@ -164,12 +165,11 @@ export default function ExperiencesDetailsPage() {
         currentLabel={experience?.title ?? "Detalhes"}
       />
 
-      {/* Hero */}
       <header className="overflow-hidden  border border-white/10 bg-black/50">
         <div className="grid lg:grid-cols-2">
           <div className="relative min-h-70">
             <img
-              src={experience.heroImageSrc ?? "/images/experiences/default.webp"}
+              src={experience.heroImageSrc ?? "/buyShipCompany.webp"}
               alt={experience.title}
               className="h-full w-full object-cover"
               loading="eager"
@@ -218,7 +218,7 @@ export default function ExperiencesDetailsPage() {
                 <p className="mt-1 text-xs text-white/50">valor único</p>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex gap-3 flex-col">
                 <button
                   type="button"
                   onClick={() => {
@@ -226,12 +226,14 @@ export default function ExperiencesDetailsPage() {
                       id: experience.id,
                       type: "experience",
                       slug: experience.slug,
+                      imageSrc: experience.heroImageSrc,
                       title: experience.title,
                       price: experience.price,
                     });
                     navigate("/cart");
                   }}
-                  className=" bg-(--primary-active) px-6 py-3 font-semibold text-white hover:opacity-90 transition cursor-pointer"
+                  className=" bg-(--primary-active) px-6 py-3 font-semibold text-white hover:opacity-90 transition cursor-pointer hover:scale-105"
+                  data-testid="reserve-now"
                 >
                   Reservar agora
                 </button>

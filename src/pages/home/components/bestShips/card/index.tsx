@@ -26,7 +26,7 @@ export default function ShipCard({
 
   return (
     <div
-      className="w-full max-w-96 select-none"
+      className="w-full max-w-96 select-none transition-all hover:scale-105"
       onClick={onClick}
       onKeyDown={handleKeyDown}
       role={onClick ? "button" : undefined}

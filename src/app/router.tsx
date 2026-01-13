@@ -8,6 +8,7 @@ import ExperiencesDetailsPage from "@/pages/experiencesDetailsPage";
 import Contact from "@/pages/contact";
 import Cart from "@/pages/cart";
 import CheckoutSuccessPage from "@/pages/checkout";
+import NotFoundPage from "@/pages/not-found";
 
 export const router = createHashRouter([
   {
@@ -21,7 +22,9 @@ export const router = createHashRouter([
       { path: "experiences/:slug", element: <ExperiencesDetailsPage /> },
       { path: "contact", element: <Contact /> },
       { path: "cart", element: <Cart /> },
-      { path: "checkoutSuccess", element: <CheckoutSuccessPage /> }
+      { path: "checkoutSuccess", element: <CheckoutSuccessPage /> },
+
+      { path: "*", element: <NotFoundPage /> }
     ]
   }
 ]);

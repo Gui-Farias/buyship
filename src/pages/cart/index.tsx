@@ -128,7 +128,7 @@ export default function CartPage() {
                               <Link
                                   to={it.type === "ship" ? `/ships/${it.slug}` : `/experiences/${it.slug}`}
                                   className="mt-1 inline-block text-xs text-white/60 hover:text-white">
-                                <p className="font-semibold text-white text-lg">{it.title}</p>
+                                <p className="font-semibold text-white text-lg" data-testid="cart-item-title">{it.title}</p>
                                 <span>Ver detalhes</span>
                               </Link>
                             </div>
@@ -187,7 +187,8 @@ export default function CartPage() {
                   type="button"
                   onClick={handleCheckout}
                   disabled={payLoading}
-                  className="inline-flex h-11 cursor-pointer items-center justify-center bg-black px-5 text-sm font-semibold text-white disabled:opacity-60"
+                  className="inline-flex h-11 cursor-pointer items-center justify-center bg-black px-5 text-sm font-semibold text-white disabled:opacity-60 transition-all hover:scale-105"
+                  data-testid={isLogged ? "checkout-primary" : "cart-login"}
                 >
                   {isLogged ? (payLoading ? "Redirecionando..." : "Finalizar compra") : "Entrar na conta"}
                 </button>

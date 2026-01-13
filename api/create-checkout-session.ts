@@ -19,7 +19,10 @@ export default async function handler(req: any, res: any) {
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
-    const items = body?.items as Item[];
+    const { items, email } = body as {
+      items: Item[];
+      email?: string;
+    };
 
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ error: "Missing items" });
@@ -29,6 +32,7 @@ export default async function handler(req: any, res: any) {
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      customer_email: email,
       success_url: `${appUrl}/#/checkoutSuccess`,
       cancel_url: `${appUrl}/#/cart`,
       line_items: items.map((it) => ({

@@ -90,6 +90,7 @@ function LoginForm({
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
+        data-testid="auth-email"
       />
       <input
         className="w-full border px-3 py-2"
@@ -99,6 +100,7 @@ function LoginForm({
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
+        data-testid="auth-password"
       />
 
       {error ? (
@@ -109,6 +111,7 @@ function LoginForm({
         type="submit"
         className="w-full bg-black px-4 py-2 cursor-pointer text-white disabled:opacity-60"
         disabled={loading}
+        data-testid="auth-submit"
       >
         {loading ? "Entrando..." : "Entrar"}
       </button>

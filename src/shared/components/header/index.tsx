@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Logo from "@/BuyShipLogo.png";
+import Logo from "/BuyShipLogo.png";
 import LoginOut from "@/shared/features/auth/components/login-out";
 
 type HeaderProps = {

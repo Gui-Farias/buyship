@@ -190,7 +190,7 @@ export default function CartPage() {
                   className="inline-flex h-11 cursor-pointer items-center justify-center bg-black px-5 text-sm font-semibold text-white disabled:opacity-60 transition-all hover:scale-105"
                   data-testid={isLogged ? "checkout-primary" : "cart-login"}
                 >
-                  {isLogged ? (payLoading ? "Redirecionando..." : "Finalizar compra") : "Entrar na conta"}
+                  {isLogged ? (payLoading ? "Redirecionando..." : "Finalizar compra") : "Faça login pra finalizar a compra"}
                 </button>
 
                 {payError ? <p className="text-sm text-red-500">{payError}</p> : null}

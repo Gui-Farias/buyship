@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 pnpm-lock.yaml
 .vercel
+
+# Environment variables
+.env
+.env.e2e

@@ -34,7 +34,11 @@ export function loadCart(): CartItem[] {
 export function saveCart(items: CartItem[]) {
   try {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
-  } catch {}
+  } catch (err) {
+    if (import.meta.env.DEV) {
+      console.warn("Falha ao salvar o carrinho no localStorage", err);
+    }
+  }
 }
 
 export function addToCart(next: Omit<CartItem, "quantity">) {
@@ -66,5 +70,9 @@ export function clearCart() {
   saveCart([]);
   try {
     localStorage.removeItem(CART_STORAGE_KEY);
-  } catch {}
+  } catch (err) {
+    if (import.meta.env.DEV) {
+      console.warn("Falha ao limpart o carrinho", err);
+    }
+  }
 }

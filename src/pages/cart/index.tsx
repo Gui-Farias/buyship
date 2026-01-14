@@ -7,6 +7,7 @@ import { formatBRLFromCents } from "@/shared/lib/format-currency";
 import type { CartItem } from "@/shared/lib/cart";
 import CTA from "@/shared/components/CTA";
 import { startStripeCheckout } from "@/shared/lib/stripe";
+import { getErrorMessage } from "@/shared/lib/error";
 
 export default function CartPage() {
   const session = useSession();
@@ -28,8 +29,9 @@ export default function CartPage() {
 
     try {
       await startStripeCheckout(items);
-    } catch (e: any) {
-      setPayError(e?.message ?? "Não foi possível iniciar o pagamento");
+    } catch (e: unknown) {
+      setPayError(getErrorMessage(e, "Não foi possível iniciar o pagamento"));
+    } finally {
       setPayLoading(false);
     }
   }

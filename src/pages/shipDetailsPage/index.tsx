@@ -138,6 +138,7 @@ function tierLabel(tier: Ship["tier"]) {
 }
 
 export default function ShipDetailsPage() {
+  const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
 
   const ship = useMemo(() => ships.find((s) => s.slug === slug), [slug]);
@@ -164,7 +165,6 @@ export default function ShipDetailsPage() {
   }
 
   const isHighlight = Boolean(ship.highlight);
-  const navigate = useNavigate();
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
@@ -227,7 +227,6 @@ export default function ShipDetailsPage() {
 
           <p className="mt-4 text-lg text-muted-foreground">{ship.description}</p>
 
-          {/* Cards rápidos (capacidade/autonomia) */}
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             <div className=" border border-black/10 bg-black/5 p-4">
               <p className="text-xs text-muted-foreground">Capacidade</p>

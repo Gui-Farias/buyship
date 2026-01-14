@@ -1,16 +1,8 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { CART_STORAGE_KEY, loadCart, saveCart, addToCart, removeFromCart, clearCart } from "./index";
+import type { CartItem } from "./index";
 
-export type CartItem = {
-  id: string;
-  type: "ship" | "experience";
-  slug: string;
-  title: string;
-  price: number;
-  quantity: 1;
-  imageSrc?: string;
-};
-
+beforeEach(() => localStorage.clear());
 
 describe("saveCart", () => {
   it("salva itens no localStorage", () => {
@@ -39,10 +31,6 @@ describe("addToCart", () => {
 });
 
 describe("Mantem 1 item quando adicina outro", () => {
-  beforeEach(() => {
-    localStorage.clear();
-  });
-
   it("não deve duplicar o item se ele já existir no carrinho", () => {
     localStorage.setItem(
       CART_STORAGE_KEY,
@@ -101,26 +89,53 @@ describe("clearCart", () => {
   });
 });
 
-describe("loadCart (dados inválidos)", () => {
-  beforeEach(() => {
-    localStorage.clear();
+
+describe("loadCart", () => {
+  it("retorna [] quando não existe storage", () => {
+    expect(loadCart()).toEqual([]);
   });
 
-  it("deve retornar array vazio se o JSON estiver inválido", () => {
-    localStorage.setItem(CART_STORAGE_KEY, "{ invalid json");
-    const result = loadCart();
-
-    expect(result).toEqual([]);
-  });
-
-  it("deve retornar array vazio se o valor não for um array", () => {
+  it("faz fallback do type para experience quando vier inválido", () => {
     localStorage.setItem(
       CART_STORAGE_KEY,
-      JSON.stringify({ id: "1", title: "Fake" })
+      JSON.stringify([
+        {
+          id: "x1",
+          type: "invalid-type",
+          slug: "abc",
+          title: "Item",
+          price: 10,
+          quantity: 1,
+        },
+      ])
     );
 
-    const result = loadCart();
+    const [item] = loadCart();
+    expect(item.type).toBe("experience");
+  });
 
-    expect(result).toEqual([]);
+  it("normaliza campos opcionais (slug/title/price/imageSrc) quando vierem ausentes ou inválidos", () => {
+    localStorage.setItem(
+      CART_STORAGE_KEY,
+      JSON.stringify([
+        {
+          id: 123,              
+          type: "ship",
+          slug: null,      
+          title: undefined,
+          price: undefined,
+          quantity: 1,     
+          imageSrc: null,
+        },
+      ])
+    );
+
+    const [item] = loadCart();
+
+    expect(item.id).toBe("123");
+    expect(item.slug).toBe("");
+    expect(item.title).toBe("");
+    expect(item.price).toBe(0);
+    expect(item.imageSrc).toBeUndefined();
   });
 });

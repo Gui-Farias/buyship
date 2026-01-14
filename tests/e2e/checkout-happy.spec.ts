@@ -44,7 +44,7 @@ test("Happy path: experiência -> carrinho -> login -> Stripe -> sucesso", async
   // Verifica se tem item no carrinho
   const cartTitle = page.getByTestId("cart-item-title");
   if (await cartTitle.count()) {
-    await expect(cartTitle).toContainText(/Orbital Premium/i);
+    await expect(cartTitle).toContainText(/Experiência Orbital Premium/i);
   } else {
     await expect(page.getByText(/Experiência Orbital Premium/i)).toBeVisible();
   }

@@ -118,8 +118,8 @@ test("Happy path: experiência -> carrinho -> login -> Stripe -> sucesso", async
   await payBtn.click();
 
   // Volta para a página de sucesso BuyShip
-  await page.waitForURL(/#\/checkoutSuccess/i, { timeout: 60_000 });
-
+  await page.waitForURL(/#\/checkoutSuccess/i, { timeout: 60_000, waitUntil: "domcontentloaded" });
+  
   // Valida pagina de sucesso
   await expect(page.getByText(/Compra confirmada▪/i)).toBeVisible();
 });

@@ -111,7 +111,7 @@ export default function CartPage() {
               <div className="mt-6 divide-y divide-white/10">
                 {items.map((it) => {
                   return (
-                    <div key={it.id} className="py-6">
+                    <div key={it.id} className="py-6" data-testid={`cart-item-${it.type}-${it.id}`}>
                       <div className="flex gap-4">
                         <div className="h-20 w-24 overflow-hidden  border border-white/10 bg-black/40 flex items-center justify-center">
                           {it.imageSrc && (
@@ -148,6 +148,7 @@ export default function CartPage() {
                               <button
                                 onClick={() => removeItem(it.id, it.type)}
                                 className=" border border-white/15 px-3 py-2 cursor-pointer text-xs font-semibold text-white/70 hover:bg-white/5"
+                                data-testid={`cart-remove-${it.type}-${it.id}`}
                               >
                                 Remover
                               </button>
@@ -167,18 +168,12 @@ export default function CartPage() {
               <h2 className="text-lg font-semibold text-white">Resumo</h2>
 
               <div className="mt-5 space-y-3 text-sm">
-                <div className="flex justify-between text-white/70">
-                  <span>Subtotal</span>
-                  <span className="font-semibold text-white">
-                    {formatBRLFromCents(subtotal)}
-                  </span>
-                </div>
 
                 <div className="h-px bg-white/10" />
 
                 <div className="flex justify-between">
                   <span className="text-white/80">Total</span>
-                  <span className="text-xl font-bold text-white">
+                  <span className="text-xl font-bold text-white" data-testid="cart-total">
                     {formatBRLFromCents(total)}
                   </span>
                 </div>

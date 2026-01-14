@@ -46,7 +46,7 @@ test("Happy path: experiência -> carrinho -> login -> Stripe -> sucesso", async
   if (await cartTitle.count()) {
     await expect(cartTitle).toContainText(/Experiência Orbital Premium/i);
   } else {
-    await expect(page.getByText(/Experiência Orbital Premium/i)).toBeVisible();
+    await expect(page.getByText("Experiência Orbital Premium", { exact: true })).toBeVisible();
   }
 
   // Abre modal pra fazer login

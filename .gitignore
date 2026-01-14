@@ -28,6 +28,7 @@ pnpm-lock.yaml
 # Environment variables
 .env
 .env.e2e
+.env*.local
 
 # test
 test-results/

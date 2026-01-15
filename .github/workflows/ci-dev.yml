@@ -68,7 +68,7 @@ jobs:
           echo "OK"
 
   deploy-pages:
-    needs: ci
+    needs: ci-deploy
     runs-on: ubuntu-latest
 
     environment:

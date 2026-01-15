@@ -23,7 +23,6 @@ export const router = createHashRouter([
       { path: "contact", element: <Contact /> },
       { path: "cart", element: <Cart /> },
       { path: "checkoutSuccess", element: <CheckoutSuccessPage /> },
-
       { path: "*", element: <NotFoundPage /> }
     ]
   }

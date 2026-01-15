@@ -43,7 +43,7 @@ O projeto utiliza uma estratégia de testes em camadas:
 Cobertura mínima:
 - Threshold configurado: 70% (statements, branches, functions e lines)
 - Relatório HTML:  
-- https://gui.farias.github.io/buyship/coverage/
+- https://gui-farias.github.io/buyship/
 ================================================================
 
 ## COMO RODAR LOCALMENTE

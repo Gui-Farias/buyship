@@ -50,6 +50,7 @@ Cobertura mínima:
 ================================================================
 
 ## COMO RODAR LOCALMENTE
+⚠️ Precisa do node 22.14 
 
 1) Instalar dependências
     - npm install

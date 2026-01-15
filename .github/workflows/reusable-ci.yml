@@ -1,0 +1,119 @@
+name: DevShip - Reusable CI
+
+on:
+  workflow_call:
+    inputs:
+      node_version:
+        type: string
+        required: false
+        default: "20"
+
+      # options
+      run_lint:
+        type: boolean
+        required: false
+        default: true
+      run_tests:
+        type: boolean
+        required: false
+        default: true
+      run_build:
+        type: boolean
+        required: false
+        default: true
+      upload_build_artifact:
+        type: boolean
+        required: false
+        default: true
+      upload_coverage_artifact:
+        type: boolean
+        required: false
+        default: true
+
+      # Commands
+      lint_command:
+        type: string
+        required: false
+        default: "npm run lint"
+      test_command:
+        type: string
+        required: false
+        default: "npm run test:coverage"
+      build_command:
+        type: string
+        required: false
+        default: "npm run build"
+
+      # Paths / names
+      build_path:
+        type: string
+        required: false
+        default: "dist"
+      artifact_name:
+        type: string
+        required: false
+        default: "build"
+      coverage_path:
+        type: string
+        required: false
+        default: "coverage"
+      coverage_artifact_name:
+        type: string
+        required: false
+        default: "coverage"
+
+      # Optional: run everything from a subfolder
+      working_directory:
+        type: string
+        required: false
+        default: "."
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node_version }}
+          cache: npm
+          cache-dependency-path: ${{ inputs.working_directory }}/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ${{ inputs.working_directory }}
+        run: npm ci
+
+      - name: Lint
+        if: ${{ inputs.run_lint }}
+        working-directory: ${{ inputs.working_directory }}
+        run: ${{ inputs.lint_command }}
+
+      - name: Tests (coverage enforced by test runner config)
+        if: ${{ inputs.run_tests }}
+        working-directory: ${{ inputs.working_directory }}
+        run: ${{ inputs.test_command }}
+
+      - name: Build
+        if: ${{ inputs.run_build }}
+        working-directory: ${{ inputs.working_directory }}
+        run: ${{ inputs.build_command }}
+
+      - name: Upload build artifact
+        if: ${{ inputs.run_build && inputs.upload_build_artifact }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: ${{ inputs.working_directory }}/${{ inputs.build_path }}
+          if-no-files-found: error
+
+      - name: Upload coverage artifact
+        if: ${{ inputs.run_tests && inputs.upload_coverage_artifact }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.coverage_artifact_name }}
+          path: ${{ inputs.working_directory }}/${{ inputs.coverage_path }}
+          if-no-files-found: error

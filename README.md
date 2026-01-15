@@ -92,7 +92,6 @@ Os testes E2E dependem das rotas serverless (/api), pois estou acessando a strip
 
 ## VARIÁVEIS DE AMBIENTE
 
-
 Use os exemplos:
 - .env.example
 - .env.e2e.example
@@ -107,6 +106,17 @@ Preencha com:
 - Credenciais usadas nos testes E2E
 
 ================================================================
+
+## Versionamento (SemVer + Conventional Commits)
+
+Commits seguem Conventional Commits.
+Releases são geradas automaticamente na `main` via semantic-release:
+
+- feat: MINOR
+- fix: PATCH
+- feat! / BREAKING CHANGE: MAJOR
+
+Tags no formato: vMAJOR.MINOR.PATCH (ex: v1.0.0)
 
 ## Branch Protection – main 
 

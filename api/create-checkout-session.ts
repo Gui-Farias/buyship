@@ -43,7 +43,7 @@ export default async function handler(
       return res.status(400).json({ error: "Missing items" });
     }
 
-    const appUrl = mustUrl(process.env.APP_URL, "http://localhost:5173");
+    const appUrl = mustUrl(process.env.APP_URL, "http://localhost:3000");
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",

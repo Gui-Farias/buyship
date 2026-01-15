@@ -64,13 +64,29 @@ Cobertura mínima:
 5) Rodar testes com cobertura
     - npm run test:coverage
 
-6) Rodar testes E2E (Playwright)
+
+⚠️ Importante sobre E2E
+
+Os testes E2E dependem das rotas serverless (/api), pois estou acessando a stripe para o caminho feliz, entao o projeto deve ser executado com o runtime da Vercel.
+
+1) Instale a Vercel CLI
+   npm i -g vercel
+
+2) Faça login (qualquer conta Vercel funciona)
+   vercel login
+
+3) Inicie o ambiente local
+   vercel dev
+
+4) Em outro terminal rodar testes E2E (Playwright)
     - npm run test:e2e 
     - OU
     - npm run test:e2e-ui  (para rodar test com ui playwright)
 
+
 #### Observação:
-Os testes E2E requerem variáveis de ambiente configuradas (.env.e2e).
+1) Os testes E2E requerem variáveis de ambiente configuradas (.env.e2e).
+2) Para rodar o e2e completo no local precisa descomentar as linha do retorno da stripe e check do text title da pagina linha 121 e 124, foi necessario comentar pois no CI nao estava acontecendo o retorno da stripe, provavelmente timeout.
 
 ================================================================
 
@@ -91,6 +107,12 @@ Preencha com:
 - Credenciais usadas nos testes E2E
 
 ================================================================
+
+## Branch Protection – main 
+
+A branch main é protegida por uma rule que exige merge apenas via Pull Request,
+com todos os checks de CI aprovados. Essa configuração garante que a main permaneça
+sempre em estado release-ready, reduzindo o risco de falhas em produção.
 
 ## COMO RODAR A PIPELINE (CI/CD)
 

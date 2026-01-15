@@ -2,9 +2,8 @@ name: CD - main devships
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    tags:
+      - "v*.*.*"
 
 concurrency:
   group: cd-main-${{ github.ref }}

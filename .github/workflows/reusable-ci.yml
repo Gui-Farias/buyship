@@ -6,7 +6,7 @@ on:
       node_version:
         type: string
         required: false
-        default: "20"
+        default: "22.14.0"
 
       # options
       run_lint:

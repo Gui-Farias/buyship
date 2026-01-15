@@ -15,7 +15,7 @@ jobs:
     name: DevShip CI (reusable)
     uses: ./.github/workflows/reusable-ci.yml
     with:
-      node_version: "20"
+      node_version: "22.14.0"
       artifact_name: dist-${{ github.sha }}
       build_path: dist
       coverage_artifact_name: coverage-html-${{ github.sha }}

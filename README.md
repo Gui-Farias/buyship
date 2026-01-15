@@ -5,6 +5,8 @@ E-commerce fictício de naves espaciais e experiências orbitais, desenvolvido c
 qualidade de código, testes automatizados e CI/CD profissional utilizando GitHub Actions
 e deploy na Vercel.
 
+URL prod https://buyship.vercel.app
+
 ================================================================
 
 ## ARQUITETURA
@@ -48,6 +50,7 @@ Cobertura mínima:
 ================================================================
 
 ## COMO RODAR LOCALMENTE
+⚠️ Precisa do node 22.14 
 
 1) Instalar dependências
     - npm install

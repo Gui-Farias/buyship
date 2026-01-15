@@ -116,6 +116,7 @@ Releases são geradas automaticamente na `main` via semantic-release:
 - fix: PATCH
 - feat! / BREAKING CHANGE: MAJOR
 
+
 Tags no formato: vMAJOR.MINOR.PATCH (ex: v1.0.0)
 
 ## Branch Protection – main 

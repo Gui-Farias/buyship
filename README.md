@@ -55,16 +55,19 @@ Cobertura mínima:
 1) Instalar dependências
     - npm install
 
-2) Rodar aplicação em desenvolvimento
+2) Criar o .env com supabase 
+    - (exemplo abaixo - VARIÁVEIS DE AMBIENTE )
+
+3) Rodar aplicação em desenvolvimento
     - npm run dev
 
-3) Rodar lint
+4) Rodar lint
     - npm run lint
 
-4) Rodar testes unitários e integração
+5) Rodar testes unitários e integração
     - npm run test
 
-5) Rodar testes com cobertura
+6) Rodar testes com cobertura
     - npm run test:coverage
 
 
@@ -72,16 +75,19 @@ Cobertura mínima:
 
 Os testes E2E dependem das rotas serverless (/api), pois estou acessando a stripe para o caminho feliz, entao o projeto deve ser executado com o runtime da Vercel.
 
-1) Instale a Vercel CLI
+1) Criar o .env.e2e
+    - (exemplo abaixo - VARIÁVEIS DE AMBIENTE)
+
+2) Instale a Vercel CLI
    npm i -g vercel
 
-2) Faça login (qualquer conta Vercel funciona)
+3) Faça login (qualquer conta Vercel funciona)
    vercel login
 
-3) Inicie o ambiente local
+4) Inicie o ambiente local
    vercel dev
 
-4) Em outro terminal rodar testes E2E (Playwright)
+5) Em outro terminal rodar testes E2E (Playwright)
     - npm run test:e2e 
     - OU
     - npm run test:e2e-ui  (para rodar test com ui playwright)

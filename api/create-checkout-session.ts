@@ -14,16 +14,16 @@ type CheckoutBody = {
   email?: string;
 };
 
-function mustUrl(input: string | undefined, fallback: string) {
-  const raw = (input ?? fallback).trim().replace(/\/+$/, "");
-  const u = new URL(raw);
-  if (u.protocol !== "http:" && u.protocol !== "https:") {
-    throw new Error(
-      `APP_URL precisa começar com http:// ou https:// (recebido: ${raw})`
-    );
-  }
-  return u.toString().replace(/\/+$/, "");
-}
+// function mustUrl(input: string | undefined, fallback: string) {
+//   const raw = (input ?? fallback).trim().replace(/\/+$/, "");
+//   const u = new URL(raw);
+//   if (u.protocol !== "http:" && u.protocol !== "https:") {
+//     throw new Error(
+//       `APP_URL precisa começar com http:// ou https:// (recebido: ${raw})`
+//     );
+//   }
+//   return u.toString().replace(/\/+$/, "");
+// }
 
 export default async function handler(
   req: VercelRequest,
@@ -43,13 +43,13 @@ export default async function handler(
       return res.status(400).json({ error: "Missing items" });
     }
 
-    const appUrl = mustUrl(process.env.APP_URL, "http://localhost:5173");
+    // const appUrl = mustUrl(process.env.APP_URL, "http://localhost:5173");
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       customer_email: email,
-      success_url: `${appUrl}/#/checkoutSuccess`,
-      cancel_url: `${appUrl}/#/cart`,
+      success_url: `https://buyship.vercel.app/#/checkoutSuccess`,
+      cancel_url: `https://buyship.vercel.app/#/cart`,
       line_items: items.map((it) => ({
         price_data: {
           currency: "brl",

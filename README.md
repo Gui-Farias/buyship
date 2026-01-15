@@ -1,4 +1,9 @@
 # Buyship 🚀
+[![CI - main devships](https://github.com/gui.farias/buyship/actions/workflows/ci-main.yml/badge.svg)]
+(https://github.com/gui.farias/buyship/actions/workflows/ci-main.yml)
+
+[![CI - development devships](https://github.com/gui.farias/buyship/actions/workflows/ci-dev.yml/badge.svg)]
+(https://github.com/gui.farias/buyship/actions/workflows/ci-dev.yml)
 
 E-commerce fictício de naves espaciais e experiências orbitais, desenvolvido com foco em
 qualidade de código, testes automatizados e CI/CD profissional utilizando GitHub Actions
